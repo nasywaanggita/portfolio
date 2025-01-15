@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="id">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Nasywa Anggita Putri | Portfolio</title>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+		/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+		<style>
+			:root {
+				--primary-color: #4a90e2;
+				--secondary-color: #2c3e50;
+				--accent-color: #e74c3c;
+				--text-color: #ffffff;
+				--background-color: #0a0a2a;
+			}
+
+			.social-links {
+				display: flex;
+				gap: 2rem;
+				margin-top: 2rem;
+			}
+
+			.social-link {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				padding: 0.8rem 1.5rem;
+				background: rgba(255, 255, 255, 0.1);
+				border-radius: 25px;
+				text-decoration: none;
+				transition: all 0.3s ease;
+			}
+
+			.social-link:hover {
+				background: rgba(74, 144, 226, 0.3);
+				transform: translateY(-3px);
+			}
+
+			.about-container {
+				max-width: 900px;
+				margin: 0 auto;
+				padding: 2rem;
+				background: rgba(255, 255, 255, 0.05);
+				border-radius: 20px;
+				backdrop-filter: blur(10px);
+			}
+
+			.about-text {
+				line-height: 1.8;
+				margin-bottom: 1.5rem;
+				font-size: 1.1rem;
+				opacity: 0.9;
+			}
+
+			.about-highlights {
+				display: flex;
+				justify-content: space-around;
+				margin-top: 3rem;
+				flex-wrap: wrap;
+				gap: 2rem;
+			}
+
+			.highlight-item {
+				text-align: center;
+				padding: 1.5rem;
+				background: rgba(74, 144, 226, 0.1);
+				border-radius: 15px;
+				transition: transform 0.3s ease;
+			}
+
+			.highlight-item:hover {
+				transform: translateY(-10px);
+			}
+
+			.highlight-number {
+				display: block;
+				font-size: 2.5rem;
+				font-weight: bold;
+				color: var(--primary-color);
+				margin-bottom: 0.5rem;
+			}
+
+			.highlight-label {
+				font-size: 0.9rem;
+				opacity: 0.8;
+			}
+
+			[data-aos] {
+				opacity: 0;
+				transform: translateY(20px);
+				transition: opacity 0.6s ease, transform 0.6s ease;
+			}
+
+			[data-aos].aos-animate {
+				opacity: 1;
+				transform: translateY(0);
+			}
+
+			.scroll-indicator {
+				position: fixed;
+				top: 50%;
+				right: 30px;
+				transform: translateY(-50%);
+				display: flex;
+				flex-direction: column;
+				gap: 10px;
+				z-index: 100;
+			}
+
+			.scroll-dot {
+				width: 10px;
+				height: 10px;
+				background: rgba(255, 255, 255, 0.3);
+				border-radius: 50%;
+				cursor: pointer;
+				transition: all 0.3s ease;
+			}
+
+			.scroll-dot.active {
+				background: var(--primary-color);
+				transform: scale(1.5);
+			}
+
+			section {
+				opacity: 0;
+				transform: translateY(20px);
+				transition: all 0.6s ease;
+			}
+
+			section.visible {
+				opacity: 1;
+				transform: translateY(0);
+			}
+
+			@keyframes float {
+				0% {
+					transform: translateY(0px);
+				}
+				50% {
+					transform: translateY(-20px);
+				}
+				100% {
+					transform: translateY(0px);
+				}
+			}
+
+			.skill-item {
+				animation: float 3s ease-in-out infinite;
+				animation-delay: calc(var(--delay) * 0.2s);
+			}
+
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+				color: #fff;
+				font-family: "Arial", sans-serif;
+			}
+
+			body {
+				background: #0a0a2a;
+				overflow-x: hidden;
+			}
+
+			.stars {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				z-index: -1;
+			}
+
+			.star {
+				position: absolute;
+				background: #fff;
+				border-radius: 50%;
+				animation: twinkle var(--duration) infinite;
+			}
+
+			@keyframes twinkle {
+				0%,
+				100% {
+					opacity: 1;
+				}
+				50% {
+					opacity: 0.3;
+				}
+			}
+
+			.navbar {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 1rem 2rem;
+				background: rgba(10, 10, 42, 0.8);
+				backdrop-filter: blur(10px);
+				z-index: 1000;
+				transition: all 0.3s ease;
+			}
+
+			.navbar.scrolled {
+				padding: 0.8rem 2rem;
+				background: rgba(10, 10, 42, 0.95);
+			}
+
+			.nav-brand {
+				display: flex;
+				align-items: center;
+			}
+
+			.logo {
+				font-size: 1.8rem;
+				font-weight: bold;
+				color: var(--primary-color);
+				background: linear-gradient(45deg, var(--primary-color), #87ceeb);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				padding: 0.5rem;
+				border: 2px solid transparent;
+				border-radius: 50%;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.logo::after {
+				content: "";
+				position: absolute;
+				top: -50%;
+				left: -50%;
+				width: 200%;
+				height: 200%;
+				background: linear-gradient(
+					45deg,
+					transparent,
+					rgba(255, 255, 255, 0.1),
+					transparent
+				);
+				transform: rotate(45deg);
+				animation: shine 3s infinite;
+			}
+
+			@keyframes shine {
+				0% {
+					transform: translateX(-100%) rotate(45deg);
+				}
+				100% {
+					transform: translateX(100%) rotate(45deg);
+				}
+			}
+
+			.nav-links {
+				display: flex;
+				gap: 2rem;
+			}
+
+			.nav-link {
+				color: var(--text-color);
+				text-decoration: none;
+				font-size: 1rem;
+				padding: 0.5rem 1rem;
+				border-radius: 20px;
+				transition: all 0.3s ease;
+				position: relative;
+			}
+
+			.nav-link::after {
+				content: "";
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				width: 0;
+				height: 2px;
+				background: var(--primary-color);
+				transition: all 0.3s ease;
+				transform: translateX(-50%);
+			}
+
+			.nav-link:hover::after {
+				width: 80%;
+			}
+
+			.nav-link.active {
+				background: rgba(74, 144, 226, 0.1);
+			}
+
+			.nav-social {
+				display: flex;
+				gap: 1rem;
+			}
+
+			.nav-social-link {
+				color: var(--text-color);
+				font-size: 1.2rem;
+				transition: all 0.3s ease;
+			}
+
+			.nav-social-link:hover {
+				color: var(--primary-color);
+				transform: translateY(-3px);
+			}
+
+			.nav-toggle {
+				display: none;
+				flex-direction: column;
+				justify-content: space-between;
+				width: 30px;
+				height: 21px;
+				background: transparent;
+				border: none;
+				cursor: pointer;
+				padding: 0;
+				z-index: 10;
+			}
+
+			.nav-toggle span {
+				width: 100%;
+				height: 3px;
+				background: var(--text-color);
+				border-radius: 10px;
+				transition: all 0.3s linear;
+				position: relative;
+				transform-origin: 1px;
+			}
+
+			@media (max-width: 768px) {
+				.nav-toggle {
+					display: flex;
+				}
+
+				.nav-links {
+					position: fixed;
+					top: 0;
+					right: -100%;
+					height: 100vh;
+					width: 100%;
+					max-width: 300px;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					background: rgba(10, 10, 42, 0.95);
+					backdrop-filter: blur(10px);
+					transition: 0.3s ease-in-out;
+				}
+
+				.nav-links.active {
+					right: 0;
+				}
+
+				.nav-social {
+					display: none;
+				}
+			}
+
+			.hero-section {
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				position: relative;
+				overflow: hidden;
+				padding-top: 120px;
+				background: linear-gradient(
+					to bottom,
+					rgba(10, 10, 42, 0.8),
+					rgba(10, 10, 42, 0.4)
+				);
+			}
+
+			.hero-content {
+				text-align: center;
+				z-index: 1;
+			}
+
+			.hero-description {
+				font-size: 1.2rem;
+				margin: 1.5rem 0;
+				opacity: 0.9;
+				max-width: 600px;
+				line-height: 1.6;
+			}
+
+			.hero-cta {
+				display: flex;
+				gap: 1rem;
+				justify-content: center;
+				margin-top: 2rem;
+			}
+
+			.cta-button {
+				padding: 1rem 2rem;
+				border-radius: 25px;
+				text-decoration: none;
+				font-weight: bold;
+				transition: all 0.3s ease;
+				border: 2px solid var(--primary-color);
+				background: var(--primary-color);
+				color: var(--text-color);
+			}
+
+			.cta-button.secondary {
+				background: transparent;
+				color: var(--primary-color);
+			}
+
+			.cta-button:hover {
+				transform: translateY(-3px);
+				box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+			}
+
+			.education-card {
+				background: rgba(255, 255, 255, 0.05);
+				border-radius: 15px;
+				padding: 2rem;
+				margin-bottom: 2rem;
+				backdrop-filter: blur(10px);
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				transition: transform 0.3s ease;
+			}
+
+			.education-card:hover {
+				transform: translateY(-5px);
+			}
+
+			.education-period {
+				color: var(--primary-color);
+				font-weight: bold;
+				margin-bottom: 0.5rem;
+			}
+
+			.education-school {
+				font-size: 1.5rem;
+				margin-bottom: 0.5rem;
+			}
+
+			.education-degree {
+				opacity: 0.9;
+				margin-bottom: 1rem;
+			}
+
+			.education-details {
+				opacity: 0.8;
+				line-height: 1.6;
+			}
+
+			.contact-container {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 2rem;
+				max-width: 1200px;
+				margin: 0 auto;
+			}
+
+			.contact-info {
+				background: rgba(255, 255, 255, 0.05);
+				padding: 2rem;
+				border-radius: 15px;
+				backdrop-filter: blur(10px);
+			}
+
+			.contact-method {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+				margin-bottom: 1.5rem;
+			}
+
+			.contact-icon {
+				font-size: 1.5rem;
+				color: var(--primary-color);
+			}
+
+			.contact-form {
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+			}
+
+			.form-group {
+				display: flex;
+				flex-direction: column;
+				gap: 0.5rem;
+			}
+
+			.form-input {
+				padding: 1rem;
+				border-radius: 10px;
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				background: rgba(255, 255, 255, 0.05);
+				color: var(--text-color);
+				font-size: 1rem;
+			}
+
+			.form-input:focus {
+				outline: none;
+				border-color: var(--primary-color);
+			}
+
+			.submit-button {
+				padding: 1rem 2rem;
+				border: none;
+				border-radius: 10px;
+				background: var(--primary-color);
+				color: var(--text-color);
+				font-size: 1rem;
+				cursor: pointer;
+				transition: all 0.3s ease;
+			}
+
+			.submit-button:hover {
+				transform: translateY(-3px);
+				box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+			}
+
+			.scroll-indicator {
+				right: 15px;
+			}
+
+			.orbit {
+				position: absolute;
+				width: 300px;
+				height: 300px;
+				border: 2px solid rgba(255, 255, 255, 0.1);
+				border-radius: 50%;
+				animation: rotate 20s linear infinite;
+			}
+
+			.planet {
+				position: absolute;
+				width: 30px;
+				height: 30px;
+				background: #4a90e2;
+				border-radius: 50%;
+				box-shadow: 0 0 20px #4a90e2;
+			}
+
+			@keyframes rotate {
+				from {
+					transform: rotate(0deg);
+				}
+				to {
+					transform: rotate(360deg);
+				}
+			}
+
+			.title {
+				font-size: 3.5rem;
+				text-align: center;
+				margin-bottom: 1rem;
+				animation: glow 2s ease-in-out infinite;
+			}
+
+			@keyframes glow {
+				0%,
+				100% {
+					text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #4a90e2;
+				}
+				50% {
+					text-shadow: 0 0 20px #fff, 0 0 30px #4a90e2, 0 0 40px #4a90e2;
+				}
+			}
+
+			.subtitle {
+				font-size: 1.5rem;
+				opacity: 0.8;
+				text-align: center;
+			}
+
+			section {
+				padding: 5rem 2rem;
+				position: relative;
+			}
+
+			.section-title {
+				font-size: 2.5rem;
+				margin-bottom: 3rem;
+				text-align: center;
+			}
+
+			.project-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 2rem;
+				max-width: 1200px;
+				margin: 0 auto;
+			}
+
+			.project-card {
+				background: rgba(255, 255, 255, 0.1);
+				border-radius: 15px;
+				padding: 2rem;
+				transition: transform 0.3s, box-shadow 0.3s;
+				cursor: pointer;
+			}
+
+			.project-card:hover {
+				transform: translateY(-10px);
+				box-shadow: 0 10px 20px rgba(74, 144, 226, 0.3);
+			}
+
+			.project-title {
+				font-size: 1.5rem;
+				margin-bottom: 1rem;
+			}
+
+			.project-desc {
+				opacity: 0.8;
+				margin-bottom: 1.5rem;
+			}
+
+			.tech-stack {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+			}
+
+			.tech-tag {
+				background: rgba(74, 144, 226, 0.3);
+				padding: 0.3rem 0.8rem;
+				border-radius: 15px;
+				font-size: 0.9rem;
+			}
+
+			.skills-container {
+				max-width: 800px;
+				margin: 0 auto;
+			}
+
+			.skill-category {
+				margin-bottom: 2rem;
+			}
+
+			.skill-title {
+				font-size: 1.8rem;
+				margin-bottom: 1rem;
+				color: #4a90e2;
+			}
+
+			.skill-list {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+				gap: 1rem;
+			}
+
+			.skill-item {
+				background: rgba(255, 255, 255, 0.1);
+				padding: 1rem;
+				border-radius: 10px;
+				text-align: center;
+				transition: transform 0.3s;
+			}
+
+			.skill-item:hover {
+				transform: scale(1.05);
+			}
+
+			.experience-container {
+				max-width: 900px;
+				margin: 0 auto;
+			}
+
+			.experience-card {
+				background: rgba(255, 255, 255, 0.1);
+				border-radius: 15px;
+				padding: 2rem;
+				margin-bottom: 2rem;
+				transition: transform 0.3s;
+			}
+
+			.experience-card:hover {
+				transform: translateX(10px);
+			}
+
+			.experience-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 1rem;
+			}
+
+			.company-name {
+				font-size: 1.5rem;
+				color: #4a90e2;
+			}
+
+			.work-period {
+				background: rgba(74, 144, 226, 0.3);
+				padding: 0.5rem 1rem;
+				border-radius: 20px;
+			}
+
+			.position {
+				font-size: 1.2rem;
+				margin-bottom: 1rem;
+				color: #fff;
+			}
+
+			.responsibilities {
+				list-style-position: inside;
+				padding-left: 1rem;
+			}
+
+			.responsibilities li {
+				margin-bottom: 0.5rem;
+				line-height: 1.6;
+				opacity: 0.8;
+			}
+
+			@media (max-width: 768px) {
+				.title {
+					font-size: 2.5rem;
+				}
+
+				.subtitle {
+					font-size: 1.2rem;
+				}
+
+				.section-title {
+					font-size: 2rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="stars"></div>
+
+		<nav class="navbar">
+			<div class="nav-brand">
+				<span class="logo">NA</span>
+			</div>
+			<div class="nav-links">
+				<a href="#about" class="nav-link">About</a>
+				<a href="#education" class="nav-link">Education</a>
+				<a href="#experience" class="nav-link">Experience</a>
+				<a href="#projects" class="nav-link">Projects</a>
+				<a href="#skills" class="nav-link">Skills</a>
+				<a href="#contact" class="nav-link">Contact</a>
+			</div>
+			<div class="nav-social">
+				<a
+					href="https://linkedin.com/in/nasywaanggita"
+					target="_blank"
+					class="nav-social-link"
+				>
+					<i class="fab fa-linkedin"></i>
+				</a>
+				<a
+					href="https://github.com/nasywaanggita"
+					target="_blank"
+					class="nav-social-link"
+				>
+					<i class="fab fa-github"></i>
+				</a>
+				<a href="mailto:naswa.anggita@gmail.com" class="nav-social-link">
+					<i class="fas fa-envelope"></i>
+				</a>
+			</div>
+			<button class="nav-toggle">
+				<span></span>
+				<span></span>
+				<span></span>
+			</button>
+		</nav>
+
+		<header class="hero-section">
+			<div class="hero-content">
+				<h1 class="title">Nasywa Anggita Putri</h1>
+				<p class="subtitle">Software Quality Assurance</p>
+				<div class="hero-description">
+					Transforming from Frontend Developer into Software Quality Assurance
+				</div>
+				<div class="hero-cta">
+					<a href="#contact" class="cta-button">Get In Touch</a>
+					<a href="#projects" class="cta-button secondary">View Projects</a>
+				</div>
+			</div>
+		</header>
+
+		<section id="about" class="fade-in">
+			<h2 class="section-title">About Me</h2>
+			<div class="about-container">
+				<div class="about-content">
+					<p class="about-text">
+						I am a final-year student with experience as a Frontend Developer
+						who is looking to transition into a Software Quality Assurance (SQA)
+						Engineer role. My background in web development provides me with a
+						deep technical understanding of applications from a developer's
+						perspective, enabling me to conduct detailed and effective testing.
+					</p>
+					<p class="about-text">
+						I have a strong interest in ensuring software quality and delivering
+						an optimal user experience. I am highly curious and eager to keep
+						learning to become a skilled Software Quality Assurance
+						professional. With a combination of Frontend Developer skills and
+						manual testing knowledge that I have acquired, I am confident in my
+						ability to contribute to delivering high-quality digital products.
+					</p>
+
+					<div class="about-highlights">
+						<div class="highlight-item">
+							<span class="highlight-number">2</span>
+							<span class="highlight-label"
+								>Years Experience<br />Frontend Developer</span
+							>
+						</div>
+						<div class="highlight-item">
+							<span class="highlight-number">10</span>
+							<span class="highlight-label">Projects<br />Completed</span>
+						</div>
+						<div class="highlight-item">
+							<span class="highlight-number">4</span>
+							<span class="highlight-label">Test Cases<br />Written</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="education" class="fade-in">
+			<h2 class="section-title">Education</h2>
+			<div class="education-container">
+				<div class="education-card" data-aos="fade-up">
+					<div class="education-period">2022 - Present</div>
+					<h3 class="education-school">Universitas Brawijaya</h3>
+					<div class="education-degree">
+						Information Technology, Vocational Faculty
+					</div>
+					<p class="education-details">
+						• GPA: 3.91/4.00<br />
+						• Relevant Courses: Database Systems, Framework-Based Programming,
+						Technical Writing and Documentation<br />
+						• Project: Designed the Student Achievement Information System
+						(SIMAPRES) website, including manual testing using Blackbox
+						testing.<br />
+					</p>
+				</div>
+
+				<div class="education-card" data-aos="fade-up" data-aos-delay="100">
+					<div class="education-period">2023</div>
+					<h3 class="education-school">Independent Study at Bangkit Academy</h3>
+					<div class="education-degree">Cloud Computing Learning Path</div>
+					<p class="education-details">
+						• Intensive 6-month program<br />
+						• Focused on using Postman for API testing<br />
+						• Manual testing of mobile applications<br />
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="experience">
+			<h2 class="section-title">Experience</h2>
+			<div class="experience-container">
+				<div class="experience-card">
+					<div class="experience-header">
+						<h3 class="company-name">IFL Chapter Malang</h3>
+						<span class="work-period">Sep 2024 - Present</span>
+					</div>
+					<h4 class="position">Frontend Developer</h4>
+					<ul class="responsibilities">
+						<li>
+							Conducted manual testing on website features to ensure
+							functionality
+						</li>
+						<li>
+							Identified and reported bugs using tools such as Trello and Google
+							Sheets
+						</li>
+						<li>
+							Coordinated with the development team to ensure issue resolution
+						</li>
+						<li>
+							Implemented responsive design principles and performed
+							compatibility testing across various devices
+						</li>
+					</ul>
+				</div>
+				<div class="experience-card">
+					<div class="experience-header">
+						<h3 class="company-name">PT Ina Gata Persada</h3>
+						<span class="work-period">Sep 2024 - Jan 2025</span>
+					</div>
+					<h4 class="position">Frontend Developer Intern</h4>
+					<ul class="responsibilities">
+						<li>
+							Conducted manual testing to ensure API integration met
+							specifications
+						</li>
+						<li>Assisted in manual regression testing for new features</li>
+						<li>Optimized website performance based on testing results</li>
+						<li>
+							Documented testing outcomes and implemented fixes for identified
+							bugs
+						</li>
+					</ul>
+				</div>
+				<div class="experience-card">
+					<div class="experience-header">
+						<h3 class="company-name">Creanomic 2023</h3>
+						<span class="work-period">Sep 2023 - Nov 2023</span>
+					</div>
+					<h4 class="position">Frontend Developer</h4>
+					<ul class="responsibilities">
+						<li>
+							Performed manual functional testing to ensure an optimal user
+							experience
+						</li>
+						<li>Designed UI/UX and aligned it with website functionality</li>
+						<li>
+							Used testing checklists to ensure all scenarios were covered
+						</li>
+						<li>
+							Conducted compatibility testing across various browsers and
+							devices
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section id="projects">
+			<h2 class="section-title">Project Portfolio</h2>
+			<div class="project-grid">
+				<div class="project-card">
+					<a
+						href="https://dimsa.project.inagata.com/"
+						target="_blank"
+						class="card-link"
+						style="text-decoration: none"
+						;
+					>
+						<h3 class="project-title">Website DIMSA</h3>
+						<p class="project-desc">
+							Developed a user interface for a school website using Laravel and
+							Bootstrap. Conducted manual testing of its features to ensure
+							functional quality.
+						</p>
+						<div class="tech-stack">
+							<span class="tech-tag">Laravel</span>
+							<span class="tech-tag">Bootstrap</span>
+							<span class="tech-tag">GIT</span>
+							<span class="tech-tag">SQL</span>
+							<span class="tech-tag">Manual Testing</span>
+						</div>
+					</a>
+				</div>
+
+				<div class="project-card">
+					<a
+						href="https://darunnajah.project.inagata.com/"
+						target="_blank"
+						class="card-link"
+						style="text-decoration: none"
+						;
+					>
+						<h3 class="project-title">Website Darunnajah</h3>
+						<p class="project-desc">
+							Developed a user interface for a school website using Laravel and
+							Bootstrap. Conducted manual testing of its features to ensure
+							functional quality.
+						</p>
+						<div class="tech-stack">
+							<span class="tech-tag">Laravel</span>
+							<span class="tech-tag">Bootstrap</span>
+							<span class="tech-tag">GIT</span>
+							<span class="tech-tag">SQL</span>
+							<span class="tech-tag">Manual Testing</span>
+						</div>
+					</a>
+				</div>
+
+				<div class="project-card">
+					<a
+						href="https://github.com/Project-Olivia-Team/Donor_Mates_Web.git"
+						target="_blank"
+						class="card-link"
+						style="text-decoration: none"
+						;
+					>
+						<h3 class="project-title">Website Donormates</h3>
+						<p class="project-desc">
+							Designed the system architecture and created website designs using
+							Figma. Developed a responsive web application for blood donation
+							services using Laravel. Conducted manual testing on
+							functionalities such as donor location search, registration, and
+							API integration.
+						</p>
+						<div class="tech-stack">
+							<span class="tech-tag">Laravel</span>
+							<span class="tech-tag">Bootstrap</span>
+							<span class="tech-tag">GIT</span>
+							<span class="tech-tag">SQL</span>
+							<span class="tech-tag">Figma</span>
+							<span class="tech-tag">Manual Testing</span>
+						</div>
+					</a>
+				</div>
+
+				<div class="project-card">
+					<a
+						href="https://iflchaptermalang.org/"
+						target="_blank"
+						class="card-link"
+						style="text-decoration: none"
+						;
+					>
+						<h3 class="project-title">Website IFL Chapter Malang</h3>
+						<p class="project-desc">
+							Developed an online donation feature using Tripay and integrated
+							it with Laravel. Conducted manual testing on all features to
+							ensure an optimal user experience.
+						</p>
+						<div class="tech-stack">
+							<span class="tech-tag">React.js</span>
+							<span class="tech-tag">Tailwind</span>
+							<span class="tech-tag">Laravel</span>
+							<span class="tech-tag">SQL</span>
+							<span class="tech-tag">GIT</span>
+							<span class="tech-tag">Manual Testing</span>
+						</div>
+					</a>
+				</div>
+
+				<div class="project-card">
+					<a
+						href="https://github.com/Garasee"
+						target="_blank"
+						class="card-link"
+						style="text-decoration: none"
+						;
+					>
+						<h3 class="project-title">Aplikasi Garasee</h3>
+						<p class="project-desc">
+							Developed the backend of the Garasee application using TypeScript
+							and Next.js. Performed functionality testing and validated API
+							functionality using Postman.
+						</p>
+						<div class="tech-stack">
+							<span class="tech-tag">Typescript</span>
+							<span class="tech-tag">Next.js</span>
+							<span class="tech-tag">Postman</span>
+							<span class="tech-tag">PostgreSQL</span>
+							<span class="tech-tag">GIT</span>
+							<span class="tech-tag">Manual Testing</span>
+						</div>
+					</a>
+				</div>
+
+				<div class="project-card">
+					<a
+						href="https://github.com/AhmadAzizi30/creanomic_2023.git"
+						target="_blank"
+						class="card-link"
+						style="text-decoration: none"
+						;
+					>
+						<h3 class="project-title">Website Creanomic 2023</h3>
+						<p class="project-desc">
+							Designed the UI/UX, implemented frontend slicing using Tailwind,
+							and ensured all visual elements functioned properly through manual
+							testing. Identified bugs across various devices and browsers.
+						</p>
+						<div class="tech-stack">
+							<span class="tech-tag">Tailwind</span>
+							<span class="tech-tag">Figma</span>
+							<span class="tech-tag">GIT</span>
+							<span class="tech-tag">Manual Testing</span>
+						</div>
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<section id="skills">
+			<h2 class="section-title">Skills & Expertise</h2>
+			<div class="skills-container">
+				<div class="skill-category">
+					<h3 class="skill-title">Testing</h3>
+					<div class="skill-list">
+						<div class="skill-item">Manual Testing</div>
+						<div class="skill-item">Functional Testing</div>
+						<div class="skill-item">Regression Testing</div>
+						<div class="skill-item">Cross-Browser Testing</div>
+						<div class="skill-item">UI/UX Testing</div>
+						<div class="skill-item">API Testing (Manual)</div>
+					</div>
+				</div>
+
+				<div class="skill-category">
+					<h3 class="skill-title">Tools & Technologies</h3>
+					<div class="skill-list">
+						<div class="skill-item">Postman</div>
+						<div class="skill-item">Trello</div>
+						<div class="skill-item">JIRA</div>
+						<div class="skill-item">Spreadsheet</div>
+						<div class="skill-item">Git</div>
+						<div class="skill-item">VS Code</div>
+					</div>
+				</div>
+
+				<div class="skill-category">
+					<h3 class="skill-title">Programming</h3>
+					<div class="skill-list">
+						<div class="skill-item">JavaScript</div>
+						<div class="skill-item">HTML</div>
+						<div class="skill-item">CSS</div>
+						<div class="skill-item">SQL</div>
+					</div>
+				</div>
+
+				<div class="skill-category">
+					<h3 class="skill-title">Frontend Development</h3>
+					<div class="skill-list">
+						<div class="skill-item">React.js</div>
+						<div class="skill-item">Laravel</div>
+						<div class="skill-item">Tailwind</div>
+						<div class="skill-item">Bootstrap</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<div class="scroll-indicator">
+			<div class="scroll-dot" data-section="header"></div>
+			<div class="scroll-dot" data-section="about"></div>
+			<div class="scroll-dot" data-section="education"></div>
+			<div class="scroll-dot" data-section="experience"></div>
+			<div class="scroll-dot" data-section="projects"></div>
+			<div class="scroll-dot" data-section="skills"></div>
+			<div class="scroll-dot" data-section="contact"></div>
+		</div>
+
+		<section id="contact" class="fade-in">
+			<h2 class="section-title">Contact Me</h2>
+			<div class="contact-container">
+				<div class="contact-info" data-aos="fade-right">
+					<div class="contact-method">
+						<i class="fas fa-envelope contact-icon"></i>
+						<div>
+							<h3>Email</h3>
+							<p>naswa.anggita@gmail.com</p>
+						</div>
+					</div>
+					<div class="contact-method">
+						<i class="fab fa-linkedin contact-icon"></i>
+						<div>
+							<h3>LinkedIn</h3>
+							<p>linkedin.com/in/nasywaanggita</p>
+						</div>
+					</div>
+					<div class="contact-method">
+						<i class="fab fa-github contact-icon"></i>
+						<div>
+							<h3>GitHub</h3>
+							<p>github.com/nasywaanggita</p>
+						</div>
+					</div>
+			</div>
+
+				<form class="contact-form" data-aos="fade-left">
+					<div class="form-group">
+						<label for="name">Name</label>
+						<input type="text" id="name" class="form-input" required />
+					</div>
+					<div class="form-group">
+						<label for="email">Email</label>
+						<input type="email" id="email" class="form-input" required />
+					</div>
+					<div class="form-group">
+						<label for="message">Message</label>
+						<textarea
+							id="message"
+							class="form-input"
+							rows="5"
+							required
+						></textarea>
+					</div>
+					<button type="submit" class="submit-button">Send Message</button>
+				</form>
+			</div>
+		</section>
+
+		<script>
+			// Initialize AOS
+			AOS.init({
+				duration: 1000,
+				once: true,
+				mirror: false,
+			});
+
+			// Scroll indicator functionality
+			const sections = document.querySelectorAll("section");
+			const scrollDots = document.querySelectorAll(".scroll-dot");
+
+			const observer = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add("visible");
+							updateScrollIndicator(entry.target.id);
+						}
+					});
+				},
+				{ threshold: 0.5 }
+			);
+
+			sections.forEach((section) => {
+				observer.observe(section);
+			});
+
+			function updateScrollIndicator(sectionId) {
+				scrollDots.forEach((dot) => {
+					dot.classList.remove("active");
+					if (dot.dataset.section === sectionId) {
+						dot.classList.add("active");
+					}
+				});
+			}
+
+			scrollDots.forEach((dot) => {
+				dot.addEventListener("click", () => {
+					const section = document.getElementById(dot.dataset.section);
+					section.scrollIntoView({ behavior: "smooth" });
+				});
+			});
+
+			// Add animation delay to skill items
+			document.querySelectorAll(".skill-item").forEach((item, index) => {
+				item.style.setProperty("--delay", index);
+			});
+
+			// Update navbar on scroll
+			function updateNavbar() {
+				const navbar = document.querySelector(".navbar");
+				const scrollPosition = window.scrollY;
+
+				if (scrollPosition > 50) {
+					navbar.classList.add("scrolled");
+				} else {
+					navbar.classList.remove("scrolled");
+				}
+
+				// Update active nav link
+				const sections = document.querySelectorAll("section");
+				sections.forEach((section) => {
+					const sectionTop = section.offsetTop - 100;
+					const sectionHeight = section.clientHeight;
+					if (
+						scrollPosition >= sectionTop &&
+						scrollPosition < sectionTop + sectionHeight
+					) {
+						document.querySelectorAll(".nav-link").forEach((link) => {
+							link.classList.remove("active");
+							if (link.getAttribute("href").slice(1) === section.id) {
+								link.classList.add("active");
+							}
+						});
+					}
+				});
+			}
+
+			window.addEventListener("scroll", updateNavbar);
+
+			// Mobile menu toggle
+			const navToggle = document.querySelector(".nav-toggle");
+			const navLinks = document.querySelector(".nav-links");
+
+			navToggle.addEventListener("click", () => {
+				navLinks.classList.toggle("active");
+				navToggle.classList.toggle("active");
+			});
+
+			// Close mobile menu when clicking outside
+			document.addEventListener("click", (e) => {
+				if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
+					navLinks.classList.remove("active");
+					navToggle.classList.remove("active");
+				}
+			});
+
+			// Close mobile menu when clicking on a link
+			document.querySelectorAll(".nav-link").forEach((link) => {
+				link.addEventListener("click", () => {
+					navLinks.classList.remove("active");
+					navToggle.classList.remove("active");
+				});
+			});
+
+			// Create stars
+			function createStars() {
+				const stars = document.querySelector(".stars");
+				const numberOfStars = 200;
+
+				for (let i = 0; i < numberOfStars; i++) {
+					const star = document.createElement("div");
+					star.className = "star";
+
+					// Random position
+					star.style.left = `${Math.random() * 100}%`;
+					star.style.top = `${Math.random() * 100}%`;
+
+					// Random size
+					const size = Math.random() * 3;
+					star.style.width = `${size}px`;
+					star.style.height = `${size}px`;
+
+					// Random twinkle duration
+					star.style.setProperty("--duration", `${2 + Math.random() * 3}s`);
+
+					stars.appendChild(star);
+				}
+			}
+
+			// Create multiple orbits with planets
+			function createOrbits() {
+				const header = document.querySelector("header");
+				const numberOfOrbits = 3;
+
+				for (let i = 0; i < numberOfOrbits; i++) {
+					const orbit = document.createElement("div");
+					orbit.className = "orbit";
+
+					// Different sizes for each orbit
+					const size = 200 + i * 100;
+					orbit.style.width = `${size}px`;
+					orbit.style.height = `${size}px`;
+
+					// Random rotation
+					orbit.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+					const planet = document.createElement("div");
+					planet.className = "planet";
+
+					// Random planet color
+					const hue = Math.random() * 360;
+					planet.style.background = `hsl(${hue}, 70%, 60%)`;
+					planet.style.boxShadow = `0 0 20px hsl(${hue}, 70%, 60%)`;
+
+					orbit.appendChild(planet);
+					header.appendChild(orbit);
+				}
+			}
+
+			// Initialize animations
+			createStars();
+			createOrbits();
+
+			// Smooth scroll for navigation
+			document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+				anchor.addEventListener("click", function (e) {
+					e.preventDefault();
+					document.querySelector(this.getAttribute("href")).scrollIntoView({
+						behavior: "smooth",
+					});
+				});
+			});
+		</script>
+	</body>
+</html>
